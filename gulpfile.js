@@ -1,5 +1,6 @@
 // gulpfile.js
-// Taken from https://github.com/MeteorPackaging/numeraljs-core-wrapper/blob/master/gulpfile.js
+// Borrowing heavily from 
+// https://github.com/MeteorPackaging/numeraljs-core-wrapper
 
 var
   autopublish = require('./autopublish.json'),
@@ -36,7 +37,6 @@ gulp.task('getUpstream', function(){
     });
   });
 });
-
 
 // Picks up current version of upstream repo and updates
 // 'package.js' and 'autopublish.json' accordingly
@@ -82,20 +82,7 @@ gulp.task('updateRelease', function() {
         .pipe(gulp.dest('./'));
 });
 
-
-// Donwload scripts necessary to run tests
-// Thanks @aronuda for providing them!
-// https://github.com/arunoda/travis-ci-meteor-packages
-gulp.task('setuptests', function(){
-  return download([
-    'https://raw.github.com/arunoda/travis-ci-meteor-packages/master/start_test.js',
-    'https://raw.github.com/arunoda/travis-ci-meteor-packages/master/phantom_runner.js',
-  ]).pipe(gulp.dest("./"));
-});
-
-
 // Actually run tests
-// NOTE: phantomjs must be available on the system
 gulp.task('test', function(){
   var
     spawn = require('child_process').spawn,
@@ -110,7 +97,6 @@ gulp.task('test', function(){
 
   return tests;
 });
-
 
 // Task that cleans up workspace
 gulp.task('clean', function() {
