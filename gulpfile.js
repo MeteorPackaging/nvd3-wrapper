@@ -22,7 +22,7 @@ gulp.task('getUpstream', function(){
     git.clone(autopublish.upstream.git, {args: ' --recursive upstream'}, function (err) {
       if (err) throw err;
       var
-        release = autopublish.upstream.release,
+        release = 'v' + autopublish.upstream.release,
         tag = gutil.env.tag || release,
         path = __dirname + '/upstream/'
       ;
@@ -99,8 +99,8 @@ gulp.task('setuptests', function(){
 gulp.task('runtests', function(){
   var
     spawn = require('child_process').spawn,
-    tests = spawn('node', ['start_test']);
-    // tests = spawn('spacejam', ['test-packages', './']);
+    // tests = spawn('node', ['start_test']);
+    tests = spawn('node_modules/.bin/spacejam', ['test-packages', './']);
   ;
 
   tests.stdout.pipe(process.stdout);
@@ -115,5 +115,16 @@ gulp.task('runtests', function(){
 
 // Task to be used to test the package
 gulp.task('test', function(){
-  runSequence('setuptests', 'runtests');
+  // runSequence('setuptests', 'runtests');
+  runSequence('runtests');
+});
+
+
+// Task that cleans up workspace
+gulp.task('clean', function() {
+  var cleanable = ['upstream'];
+  console.log("Cleaning " + cleanable.join(','));
+  return del(cleanable, function(err) {
+    if(err) throw err;
+  });
 });
