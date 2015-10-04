@@ -96,10 +96,9 @@ gulp.task('setuptests', function(){
 
 // Actually run tests
 // NOTE: phantomjs must be available on the system
-gulp.task('runtests', function(){
+gulp.task('test', function(){
   var
     spawn = require('child_process').spawn,
-    // tests = spawn('node', ['start_test']);
     tests = spawn('node_modules/.bin/spacejam', ['test-packages', './']);
   ;
 
@@ -110,13 +109,6 @@ gulp.task('runtests', function(){
   });
 
   return tests;
-});
-
-
-// Task to be used to test the package
-gulp.task('test', function(){
-  // runSequence('setuptests', 'runtests');
-  runSequence('runtests');
 });
 
 
