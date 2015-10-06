@@ -63,8 +63,8 @@ gulp.task('updateVersion', function() {
     else {
       throw 'Unable to extract current version!';
     }
-    console.log('Verision: ' + version);
-    gulp.src(['package.js', 'autopublish.json'])
+    console.log('Version: ' + version);
+    gulp.src(['package.js', 'autopublish.json', 'package.json'])
       .pipe(replace(versionRegexp, '$1' + version + '$3'))
       .pipe(gulp.dest('./'));
   });
