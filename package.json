@@ -1,11 +1,16 @@
 {
+  "name": "nvd3-wrapper",
+  "version": "1.8.1",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/MeteorPackaging/nvd3-wrapper.git",
   "devDependencies": {
-    "del": "^2.0.2",
+    "del": "^1.1.1",
     "gulp": "^3.9.0",
     "gulp-download": "0.0.1",
     "gulp-git": "^1.5.0",
     "gulp-replace": "^0.5.4",
     "gulp-util": "^3.0.6",
-    "run-sequence": "^1.1.4"
+    "run-sequence": "^1.1.4",
+    "spacejam": "^1.2.2"
   }
 }

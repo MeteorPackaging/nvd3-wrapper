@@ -1,5 +1,6 @@
 // gulpfile.js
-// Taken from https://github.com/MeteorPackaging/numeraljs-core-wrapper/blob/master/gulpfile.js
+// Borrowing heavily from 
+// https://github.com/MeteorPackaging/numeraljs-core-wrapper
 
 var
   autopublish = require('./autopublish.json'),
@@ -37,7 +38,6 @@ gulp.task('getUpstream', function(){
   });
 });
 
-
 // Picks up current version of upstream repo and updates
 // 'package.js' and 'autopublish.json' accordingly
 gulp.task('updateVersion', function() {
@@ -63,8 +63,8 @@ gulp.task('updateVersion', function() {
     else {
       throw 'Unable to extract current version!';
     }
-    console.log('Verision: ' + version);
-    gulp.src(['package.js', 'autopublish.json'])
+    console.log('Version: ' + version);
+    gulp.src(['package.js', 'autopublish.json', 'package.json'])
       .pipe(replace(versionRegexp, '$1' + version + '$3'))
       .pipe(gulp.dest('./'));
   });
@@ -82,25 +82,11 @@ gulp.task('updateRelease', function() {
         .pipe(gulp.dest('./'));
 });
 
-
-// Donwload scripts necessary to run tests
-// Thanks @aronuda for providing them!
-// https://github.com/arunoda/travis-ci-meteor-packages
-gulp.task('setuptests', function(){
-  return download([
-    'https://raw.github.com/arunoda/travis-ci-meteor-packages/master/start_test.js',
-    'https://raw.github.com/arunoda/travis-ci-meteor-packages/master/phantom_runner.js',
-  ]).pipe(gulp.dest("./"));
-});
-
-
 // Actually run tests
-// NOTE: phantomjs must be available on the system
-gulp.task('runtests', function(){
+gulp.task('test', function(){
   var
     spawn = require('child_process').spawn,
-    tests = spawn('node', ['start_test']);
-    // tests = spawn('spacejam', ['test-packages', './']);
+    tests = spawn('node_modules/.bin/spacejam', ['test-packages', './']);
   ;
 
   tests.stdout.pipe(process.stdout);
@@ -112,8 +98,12 @@ gulp.task('runtests', function(){
   return tests;
 });
 
-
-// Task to be used to test the package
-gulp.task('test', function(){
-  runSequence('setuptests', 'runtests');
+// Task that cleans up workspace
+gulp.task('clean', function() {
+  var cleanable = ['upstream'];
+  console.log("Cleaning " + cleanable.join(','));
+  return del(cleanable, function(err) {
+    if(err) throw err;
+  });
 });
+
