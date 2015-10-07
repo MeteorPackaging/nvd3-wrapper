@@ -23,7 +23,7 @@ gulp.task('getUpstream', function(){
     git.clone(autopublish.upstream.git, {args: ' --recursive upstream'}, function (err) {
       if (err) throw err;
       var
-        release = 'v' + autopublish.upstream.release,
+        release = autopublish.upstream.release,
         tag = gutil.env.tag || release,
         path = __dirname + '/upstream/'
       ;
