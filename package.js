@@ -2,7 +2,7 @@
 // The Meteor package file.
 
 Package.describe({
-  name: 'jdlubrano:nvd3-wrapper', // this name will be changed once the autopublish workflow is confirmed to be working
+  name: 'nvd3:nvd3-wrapper', // this name will be changed once the autopublish workflow is confirmed to be working
   summary: 'NVD3 (not yet official) - Reusable charts for d3.js',
   version: '1.8.1',
   git: 'https://github.com/MeteorPackaging/nvd3-wrapper.git'
@@ -20,7 +20,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use('jdlubrano:nvd3-wrapper');
+  api.use('nvd3:nvd3-wrapper');
 
   api.use([
     'tinytest',
