@@ -1,8 +1,8 @@
 {
-  "version": "1.8.1",
+  "version": "1.8.2",
   "upstream": {
     "git": "https://github.com/novus/nvd3.git",
-    "release": "v1.8.1",
+    "release": "v1.8.2",
     "versionFile": "package.json"
   },
   "hook": {
